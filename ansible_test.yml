@@ -1,0 +1,35 @@
+# ===========================================================================
+#                       ANSIBLE TEST CONNECTIVITY SCRIPT
+# ===========================================================================
+# .NOTES
+#	===========================================================================
+#	 Created with: 	Visual Studio Code
+#	 Created on:   	03/04/2020
+#	 Filename:     	ansible_test.yml
+#	===========================================================================
+#
+#	.DESCRIPTION
+#		This YAML script test connectivity to the any server listed in the 
+#   "ansible_server" subset of the inventory file. As seen in the example
+#   below this script connects with the cahobbes account and prompts for the
+#   SSH password.
+#
+# .EXAMPLE
+# 
+
+---
+- hosts: all
+  become: no
+
+  tasks:
+  - name: Check the uptime
+    command: uptime
+    register: UPTIME_PRE_REBOOT
+
+  - debug: msg={{UPTIME_PRE_REBOOT.stdout}}
+
+  - name: Print Working Directory
+    command: pwd
+    register: PRINT_WORKING_DIRECTORY
+
+  - debug: msg={{PRINT_WORKING_DIRECTORY.stdout}}
